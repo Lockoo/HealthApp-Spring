@@ -1,0 +1,41 @@
+package com.example.demo.repositories;
+
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.demo.domain.Doctor;
+
+@Repository
+@Transactional()
+public class DoctorDAOImpl implements DoctorDAO
+{
+    
+    @Autowired
+    private SessionFactory sessionFactory;
+    
+    
+    @Override
+    public List<Doctor> findBySpeciality(String speciality)
+    {
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.getNamedQuery("findBySpeciality");
+        query.setParameter("speciality", speciality);
+        return query.list();
+    }
+
+
+    @Override
+    public List<Doctor> findAll()
+    {
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.getNamedQuery("findAll");
+        return query.list();
+    }
+
+}
