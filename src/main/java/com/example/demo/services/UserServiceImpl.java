@@ -43,15 +43,15 @@ public class UserServiceImpl implements UserService
     @Override
     public User doesUserExist(String email) throws UserNotFoundException
     {
-        User user = userDAO.findByEmail(email).get(0);
-        if(user == null)
+        if(userDAO.findByEmail(email).isEmpty())
         {
             throw new UserNotFoundException("User with Email: " + email + " not found.");
         }
         else
         {
+            User user = userDAO.findByEmail(email).get(0);
             return user;
-        }        
+        }
     }
 
     @Override
