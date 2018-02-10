@@ -1,5 +1,8 @@
--Webapp Project for Doctors&Patients while using Spring5 in the Back and Angular4 in the Frontend
+Basic CRUD Project for learning purposes!
 
--Hibernate used as ORM-Tool for MySQL DB
+
+-Webapp for Doctors&Patients using Spring5 for the Backend and Angular4 for Frontend
+
+-Hibernate used as ORM-Tool for administering a MySQL DB
 
 -HealthApp-Angular Frontend as Submodule
