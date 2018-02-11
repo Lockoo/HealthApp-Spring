@@ -36,6 +36,7 @@ import com.example.demo.domain.User;
 import com.example.demo.exceptions.UnmatchingUserCredentialsException;
 import com.example.demo.exceptions.UserNotFoundException;
 import com.example.demo.helpers.ExecutionStatus;
+import com.example.demo.helpers.User_Json;
 import com.example.demo.helpers.UsersInfo;
 import com.example.demo.services.UserService;
 
@@ -87,11 +88,16 @@ public class UserAccountController
         user.setPassword(reqUser.getPassword());
         user.setFirstName(reqUser.getFirstName());
         user.setLastName(reqUser.getLastName());
+        user.setRole(reqUser.getRole());
         
         User persistedUser = userService.save(user);
         
+        System.out.println(reqUser.getFirstName());
+        System.out.println(reqUser.getEmail());
+        
+        User_Json user_json = new User_Json(user);
 
-        return new ExecutionStatus("USER_ACCOUNT_CREATED", "User account successfully created");
+        return new ExecutionStatus("USER_ACCOUNT_CREATED", "User account successfully created", user_json);
     }
 
     @PostMapping(value = "/login")
@@ -113,9 +119,11 @@ public class UserAccountController
         }
         User userDetails = new User();
         userDetails.setFirstName(user.getFirstName());
+        userDetails.setEmail(user.getEmail());
+        userDetails.setLastName(user.getLastName());
         System.out.println("Login von: " + user.getFirstName() + " erfolgreich.");
         
-        return new ExecutionStatus("USER_LOGIN_SUCCESSFUL", "Login Successful!", userDetails);
+        return new ExecutionStatus("USER_LOGIN_SUCCESSFUL", "Login Successful!", new User_Json(userDetails));
     }
 
     @PostMapping(value = "/user/update")

@@ -5,7 +5,7 @@ import com.example.demo.domain.User;
 public class ExecutionStatus {
 	private String code;
 	private String message;
-	private User user;
+	private User_Json user;
 	
 	public ExecutionStatus(){
 		
@@ -16,7 +16,7 @@ public class ExecutionStatus {
 		this.message = message;
 	}
 	
-	public ExecutionStatus(String code, String message, User user) {
+	public ExecutionStatus(String code, String message, User_Json user) {
 		this.code = code;
 		this.message = message;
 		this.user = user;
@@ -35,11 +35,11 @@ public class ExecutionStatus {
 		this.message = message;
 	}
 
-	public User getUser() {
+	public User_Json getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(User_Json user) {
 		this.user = user;
 	}
 }
