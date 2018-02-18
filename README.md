@@ -4,13 +4,13 @@ Spring Boot + Spring MVC backend Server
 
 Hibernate used as ORM-Tool for administration of MySQL DB
 
-HealthApp-Angular frontend as Submodule
+Submodule [Healthapp-Angular](https://github.com/Lockoo/HealthApp-Angular) frontend to make calls to the App
 
 
 
 # Running the App with Docker Compose
 
-Running the App is as simple as running docker-compose up in the root directory! (pulling the image from locko/healthapp-spring)
+Running the App is as simple as running 'docker-compose up' in the root directory! (pulling the image from locko/healthapp-spring)
 
 
 A MySQL-Server will be started and initialized with a scheme.
