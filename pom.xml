@@ -15,18 +15,18 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.9.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	
+
 	<repositories>
-	  <repository>
-	    <id>spring-snapshots</id>
-	    <name>Spring Snapshots</name>
-	    <url>https://repo.spring.io/libs-snapshot</url>
-	    <snapshots>
-	      <enabled>true</enabled>
-	    </snapshots>
-	  </repository>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 
 	<properties>
@@ -35,13 +35,13 @@
 		<java.version>1.8</java.version>
 		<junit.version>4.12</junit.version>
 		<junit.jupiter.version>5.0.0-M4</junit.jupiter.version>
-   		<junit.vintage.version>${junit.version}.0-M4</junit.vintage.version>
- 		<junit.platform.version>1.0.0-M4</junit.platform.version>
- 		<mockito.version>1.10.19</mockito.version>
+		<junit.vintage.version>${junit.version}.0-M4</junit.vintage.version>
+		<junit.platform.version>1.0.0-M4</junit.platform.version>
+		<mockito.version>1.10.19</mockito.version>
 	</properties>
 
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -65,120 +65,123 @@
 			<scope>test</scope>
 		</dependency>
 
-        
-        <dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-core</artifactId>
-		    <version>${mockito.version}</version>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>
-		    <groupId>com.google.code.gson</groupId>
-		    <artifactId>gson</artifactId>
-		    <version>1.7.1</version>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.7.1</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-web</artifactId>
-		    <version>4.2.3.RELEASE</version>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.2.3.RELEASE</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
 		<dependency>
-		    <groupId>org.springframework.security.oauth</groupId>
-		    <artifactId>spring-security-oauth2</artifactId>
-		    <version>2.1.1.RELEASE</version>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>2.1.1.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-config</artifactId>
-		    <version>4.2.3.RELEASE</version>
-		</dependency>		
-		
-		
-		 <dependency>
-		     <groupId>org.junit.platform</groupId>
-		     <artifactId>junit-platform-surefire-provider</artifactId>
-		     <version>${junit.platform.version}</version>
-   		</dependency> 
-   		
-   		<dependency>
-		     <groupId>org.junit.jupiter</groupId>
-		     <artifactId>junit-jupiter-api</artifactId>
-		     <version>${junit.jupiter.version}</version>
-		     <scope>test</scope>
-   		</dependency>
-   		
-		   <dependency>
-		     <groupId>org.junit.jupiter</groupId>
-		     <artifactId>junit-jupiter-engine</artifactId>
-		     <version>${junit.jupiter.version}</version>
-		   </dependency>
-		   
-		   <dependency>
-			     <groupId>org.junit.vintage</groupId>
-			     <artifactId>junit-vintage-engine</artifactId>
-			     <version>${junit.vintage.version}</version>
-		   </dependency>
-		   
-		   <dependency>
-			     <groupId>org.mockito</groupId>
-			     <artifactId>mockito-core</artifactId>
-			     <version>${mockito.version}</version>
-		   </dependency>
-		
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-surefire-provider</artifactId>
+			<version>${junit.platform.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>${junit.vintage.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 		<plugins>
-		
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<finalName>healthapp-spring</finalName>
+				</configuration>
 			</plugin>
-			
+
 			<plugin>
-		       <artifactId>maven-compiler-plugin</artifactId>
-		       <version>3.1</version>
-		       <configuration>
-		          <source>${java.version}</source>
-		          <target>${java.version}</target>
-       			</configuration>
-     		</plugin>
-     		
-     		<plugin>
-		       <artifactId>maven-surefire-plugin</artifactId>
-		       <version>2.19.1</version>
-		       <configuration>
-		         <includes>
-		          <include>**/Test*.java</include>
-		          <include>**/*Test.java</include>
-		          <include>**/*Tests.java</include>
-		          <include>**/*TestCase.java</include>
-		        </includes>
-		       </configuration>
-		       <dependencies>
-		         <dependency>
-		           <groupId>org.junit.platform</groupId>
-		           <artifactId>junit-platform-surefire-provider</artifactId>
-		           <version>${junit.platform.version}</version>
-		         </dependency>
-		         <dependency>
-		           <groupId>org.junit.jupiter</groupId>
-		           <artifactId>junit-jupiter-engine</artifactId>
-		           <version>${junit.jupiter.version}</version>
-		         </dependency>
-		         <dependency>
-		           <groupId>org.junit.vintage</groupId>
-		           <artifactId>junit-vintage-engine</artifactId>
-		           <version>${junit.vintage.version}</version>
-		         </dependency>
-		       </dependencies>
-     		</plugin>
-		
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<includes>
+						<include>**/Test*.java</include>
+						<include>**/*Test.java</include>
+						<include>**/*Tests.java</include>
+						<include>**/*TestCase.java</include>
+					</includes>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<version>${junit.platform.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.junit.jupiter</groupId>
+						<artifactId>junit-jupiter-engine</artifactId>
+						<version>${junit.jupiter.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.junit.vintage</groupId>
+						<artifactId>junit-vintage-engine</artifactId>
+						<version>${junit.vintage.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
 		</plugins>
 	</build>
 
