@@ -10,7 +10,7 @@ Submodule [Healthapp-Angular](https://github.com/Lockoo/HealthApp-Angular) front
 
 # Running the App with Docker Compose
 
-Running the App is as simple as running 'docker-compose up' in the root directory! (pulling the image from locko/healthapp-spring)
+Running the App is as simple as running 'docker-compose up' in the root directory! (image from [locko/healthapp-spring](https://hub.docker.com/r/locko/healthapp-spring/))
 
 
 A MySQL-Server will be started and initialized with a scheme.
