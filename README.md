@@ -1,10 +1,8 @@
 # Basic CRUD WebApp for learning purposes!
 
-Spring Boot + Spring MVC backend Server
-
 Hibernate used as ORM-Tool for administration of MySQL DB
-
-Submodule [Healthapp-Angular](https://github.com/Lockoo/HealthApp-Angular) frontend to make calls to the App
+Spring Boot/MVC for a RESTful Webservice
+Submodule [Healthapp-Angular](https://github.com/Lockoo/HealthApp-Angular) frontend to make calls to the Webservice
 
 
 
