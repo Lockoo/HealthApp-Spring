@@ -23,7 +23,13 @@ services:
     ports: 
       - "8080:8080"
 
-    
+  healthapp-angular:
+    image: locko/healthapp-angular
+    ports:
+      - "4200:4200"
+    depends_on:
+      - healthapp-spring
+
     
     
 

@@ -65,7 +65,7 @@ public class UserAccountController
         return Collections.singletonMap("token", session.getId());
     }
 
-    //TODO rite now
+    //TODO rite now (lastName missing on signup)
     @PostMapping(value = "/signup")
     public ExecutionStatus processSignup(ModelMap model, @RequestBody User reqUser)
     {

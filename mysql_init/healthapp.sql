@@ -28,3 +28,4 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (id, email, `password`, first_name, last_name, role) VALUES
 (1, 'a@z.de', 'pw', 'fn', 'ln', 0);
 
+INSERT INTO doctor values (1, 'a@d.de', 'pw', 'fn', 'ln', 'speciality');

@@ -28,7 +28,6 @@ public class DoctorController
     public Doctor[] getAllDoctors()
     {
         Doctor[] docs = docService.findAll();
-        System.out.println(docs[0].getFirstName());
         return docs;
     }
 }
