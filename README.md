@@ -10,8 +10,8 @@ Submodule [Healthapp-Angular](https://github.com/Lockoo/HealthApp-Angular) front
 
 # Running the App with Docker Compose
 
-Running the App is as simple as running 'docker-compose up' in the root directory! (image from [locko/healthapp-spring](https://hub.docker.com/r/locko/healthapp-spring/))
+Running the App is as simple as running 'docker-compose up -d' in the root directory!
 
-
-A MySQL-Server will be started and initialized with a scheme.
+At first a MySQL-Server will be started and initialized with a SQL-Scheme.
 The embedded Tomcat-Server will wait for the Database to be initialized and then fire up the Spring Boot Application listening on localhost:8080
+Last but not least if everything is ready the Angular-App will be started and is reachable with your Browser on localhost:4200
