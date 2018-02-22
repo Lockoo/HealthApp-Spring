@@ -13,7 +13,8 @@ import javax.persistence.Table;
 @Table(name = "doctor")
 @NamedQueries(
 { @NamedQuery(name = "findBySpeciality", query = "from Doctor d where d.speciality = :speciality"), @NamedQuery(name = "findAll", query = "from Doctor"),
-    @NamedQuery(name = "findDocByEmail", query = "from Doctor d where d.email = :email")})
+    @NamedQuery(name = "findDocByEmail", query = "from Doctor d where d.email = :email"),
+    @NamedQuery(name = "changeDocFirstName", query = "update Doctor set firstName = :firstName" + " where email = :email")})
 public class Doctor
 {
     @Id

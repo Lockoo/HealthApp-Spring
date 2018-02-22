@@ -59,4 +59,19 @@ public class DoctorDAOImpl implements DoctorDAO
         return doc;
     }
 
+
+    @Override
+    public Doctor changeFirstName(Doctor doc, String firstName)
+    {
+        Session session = this.sessionFactory.openSession();
+        Query query = session.getNamedQuery("changeDocFirstName");
+        query.setParameter("email", doc.getEmail());
+        query.setParameter("firstName", firstName);
+        query.executeUpdate();
+        
+        Query queryReturn = session.getNamedQuery("findDocByEmail");
+        queryReturn.setParameter("email", doc.getEmail());
+        return (Doctor) queryReturn.list().get(0);
+    }
+
 }

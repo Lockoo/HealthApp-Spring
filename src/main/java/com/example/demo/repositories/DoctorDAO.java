@@ -13,4 +13,6 @@ public interface DoctorDAO
     public List<Doctor> findAll();
     
     public Doctor saveDoctor(Doctor doc);
+    
+    public Doctor changeFirstName(Doctor doc, String firstName);
 }

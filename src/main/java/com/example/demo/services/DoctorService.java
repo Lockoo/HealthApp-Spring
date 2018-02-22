@@ -8,7 +8,11 @@ public interface DoctorService
     
     public Doctor[] getBySpeciality(String speciality);
     
+    public Doctor getByEmail(String email);
+    
     public Doctor[] findAll();
     
     public Doctor saveDoctor(Doctor doc);
+    
+    public Doctor changeFirstName(Doctor doc, String firstName);
 }

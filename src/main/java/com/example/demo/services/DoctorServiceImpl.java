@@ -62,4 +62,16 @@ public class DoctorServiceImpl implements DoctorService
     {
         return this.docDAO.saveDoctor(doc);
     }
+
+    @Override
+    public Doctor getByEmail(String email)
+    {
+        return this.docDAO.findByEmail(email).get(0);
+    }
+
+    @Override
+    public Doctor changeFirstName(Doctor doc, String firstName)
+    {
+        return this.docDAO.changeFirstName(doc, firstName);
+    }
 }
