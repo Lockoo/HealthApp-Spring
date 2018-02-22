@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.domain.Doctor;
 //import com.example.demo.configuration.CustomAuthenticationProvider;
 import com.example.demo.domain.User;
 import com.example.demo.exceptions.UnmatchingUserCredentialsException;
@@ -38,8 +39,8 @@ import com.example.demo.exceptions.UserNotFoundException;
 import com.example.demo.helpers.ExecutionStatus;
 import com.example.demo.helpers.User_Json;
 import com.example.demo.helpers.UsersInfo;
+import com.example.demo.services.DoctorService;
 import com.example.demo.services.UserService;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -49,14 +50,17 @@ public class UserAccountController
 
     final static Logger logger = LoggerFactory.getLogger(UserAccountController.class);
 
-    // Delegate Service for serving User Login Functionality (check wether user with the given login credentials, exists in the system -> userDAO)
-    UserService userService;
+    // Delegate Service for serving User Login Functionality (check wether user
+    // with the given login credentials, exists in the system -> userDAO)
+    private UserService userService;
+
+    private DoctorService doctorService;
 
     @Autowired
-    public UserAccountController(UserService userService)
+    public UserAccountController(UserService userService, DoctorService doctorService)
     {
         this.userService = userService;
-
+        this.doctorService = doctorService;
     }
 
     @GetMapping(value = "/token")
@@ -65,39 +69,60 @@ public class UserAccountController
         return Collections.singletonMap("token", session.getId());
     }
 
-    //TODO rite now (lastName missing on signup)
+    // TODO rite now (lastName missing on signup)
     @PostMapping(value = "/signup")
-    public ExecutionStatus processSignup(ModelMap model, @RequestBody User reqUser)
+    public ExecutionStatus processSignup(ModelMap model, @RequestBody User_Json reqUser)
     {
-        User user = null;
-        try
+        if (reqUser.getRole() == 0)
         {
-            user = userService.doesUserExist(reqUser.getEmail());
-        }
-        catch (UserNotFoundException e)
-        {
-        }
-        if (user != null)
-        {
-            return new ExecutionStatus("USER_ACCOUNT_EXISTS", "User account with same email address exists. Please try again!");
-        }
-        
-        
-        user = new User();
-        user.setEmail(reqUser.getEmail());
-        user.setPassword(reqUser.getPassword());
-        user.setFirstName(reqUser.getFirstName());
-        user.setLastName(reqUser.getLastName());
-        user.setRole(reqUser.getRole());
-        
-        User persistedUser = userService.save(user);
-        
-        System.out.println(reqUser.getFirstName());
-        System.out.println(reqUser.getEmail());
-        
-        User_Json user_json = new User_Json(user);
+            System.out.println("role 0");
+            User user = null;
+            try
+            {
+                user = userService.doesUserExist(reqUser.getEmail());
+            }
+            catch (UserNotFoundException e)
+            {
+            }
+            if (user != null)
+            {
+                return new ExecutionStatus("USER_ACCOUNT_EXISTS", "User account with same email address exists. Please try again!");
+            }
 
-        return new ExecutionStatus("USER_ACCOUNT_CREATED", "User account successfully created", user_json);
+            user = new User();
+            user.setEmail(reqUser.getEmail());
+            user.setPassword(reqUser.getPassword());
+            user.setFirstName(reqUser.getFirstName());
+            user.setLastName(reqUser.getLastName());
+            user.setRole(reqUser.getRole());
+
+            userService.save(user);
+            User_Json user_json = new User_Json(user);
+
+            return new ExecutionStatus("USER_ACCOUNT_CREATED", "User account successfully created", user_json);
+        }
+
+        else
+        {
+            System.out.println("role 1");
+            if (doctorService.doesDoctorExist(reqUser.getEmail()))
+            {
+                return new ExecutionStatus("DOCTOR_ACCOUNT_EXISTS", "Doctor Account with this email exists, please try again.");
+            }
+            else
+            {
+                Doctor doc = new Doctor();
+                doc.setFirstName(reqUser.getFirstName());
+                doc.setLastName(reqUser.getLastName());
+                doc.setEmail(reqUser.getEmail());
+                doc.setPassword(reqUser.getPassword());
+                doc.setSpeciality(reqUser.getSpeciality());
+                
+                doctorService.saveDoctor(doc);
+                
+                return new ExecutionStatus("DOCTOR_ACCOUNT_CREATED", "Doctor account successfully created", new User_Json(doc));
+            }
+        }
     }
 
     @PostMapping(value = "/login")
@@ -122,7 +147,7 @@ public class UserAccountController
         userDetails.setEmail(user.getEmail());
         userDetails.setLastName(user.getLastName());
         System.out.println("Login von: " + user.getFirstName() + " erfolgreich.");
-        
+
         return new ExecutionStatus("USER_LOGIN_SUCCESSFUL", "Login Successful!", new User_Json(userDetails));
     }
 
@@ -165,7 +190,6 @@ public class UserAccountController
         return new ModelAndView("forgotpassword", model);
     }
 
-
     @GetMapping(value = "/count")
     public UsersInfo getUsersInfo(ModelMap model)
     {
@@ -173,7 +197,7 @@ public class UserAccountController
         UsersInfo data = new UsersInfo();
         data.setCount(count);
         data.setMessage("findAllCount");
-        //TODO get all users and set them here -> mirror datatypes in angular
+        // TODO get all users and set them here -> mirror datatypes in angular
         return data;
     }
 

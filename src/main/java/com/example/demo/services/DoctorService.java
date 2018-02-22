@@ -4,7 +4,11 @@ import com.example.demo.domain.Doctor;
 
 public interface DoctorService
 {
-    public Doctor[] getBySpeciality();
+    public boolean doesDoctorExist(String email);
+    
+    public Doctor[] getBySpeciality(String speciality);
     
     public Doctor[] findAll();
+    
+    public Doctor saveDoctor(Doctor doc);
 }

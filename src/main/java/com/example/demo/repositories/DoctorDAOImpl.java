@@ -20,6 +20,7 @@ public class DoctorDAOImpl implements DoctorDAO
     private SessionFactory sessionFactory;
     
     
+    @SuppressWarnings("unchecked")
     @Override
     public List<Doctor> findBySpeciality(String speciality)
     {
@@ -36,6 +37,26 @@ public class DoctorDAOImpl implements DoctorDAO
         Session session = this.sessionFactory.getCurrentSession();
         Query query = session.getNamedQuery("findAll");
         return query.list();
+    }
+
+
+    @Override
+    public List<Doctor> findByEmail(String email)
+    {
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.getNamedQuery("findDocByEmail");
+        query.setString("email", email);
+        return query.list();
+    }
+
+
+    @Override
+    public Doctor saveDoctor(Doctor doc)
+    {
+        Session session = this.sessionFactory.openSession();
+        session.save(doc);
+        session.close();
+        return doc;
     }
 
 }

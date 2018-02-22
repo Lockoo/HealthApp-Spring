@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import static org.mockito.Matchers.anyList;
+
 import java.awt.List;
 import java.util.ArrayList;
 
@@ -22,9 +24,16 @@ public class DoctorServiceImpl implements DoctorService
     }
 
     @Override
-    public Doctor[] getBySpeciality()
+    public Doctor[] getBySpeciality(String speciality)
     {
-        return null;
+        Doctor[] doctors = new Doctor[docDAO.findBySpeciality(speciality).size()];
+        int i = 0;
+    
+        for(Doctor doc : docDAO.findBySpeciality(speciality))
+        {
+            doctors[i++] = doc;
+        }
+        return doctors;
     }
 
     @Override
@@ -33,5 +42,24 @@ public class DoctorServiceImpl implements DoctorService
         Doctor[] docs = new Doctor[this.docDAO.findAll().size()];
         docs = this.docDAO.findAll().toArray(docs);
         return docs;
+    }
+
+    @Override
+    public boolean doesDoctorExist(String email)
+    {       
+        if(this.docDAO.findByEmail(email).isEmpty())
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    @Override
+    public Doctor saveDoctor(Doctor doc)
+    {
+        return this.docDAO.saveDoctor(doc);
     }
 }
