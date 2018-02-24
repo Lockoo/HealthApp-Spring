@@ -74,4 +74,10 @@ public class DoctorServiceImpl implements DoctorService
     {
         return this.docDAO.changeFirstName(doc, firstName);
     }
+    
+    @Override
+    public void deleteDoctor(Doctor doctor)
+    {
+        this.docDAO.deleteDoctor(doctor);
+    }
 }

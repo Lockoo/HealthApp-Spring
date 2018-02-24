@@ -73,5 +73,14 @@ public class DoctorDAOImpl implements DoctorDAO
         queryReturn.setParameter("email", doc.getEmail());
         return (Doctor) queryReturn.list().get(0);
     }
+    
+    @Override
+    public void deleteDoctor(Doctor doctor)
+    {
+        Session session = this.sessionFactory.openSession();
+        Query query = session.getNamedQuery("deleteDoctor");
+        query.setParameter("email", doctor.getEmail());
+        query.executeUpdate();
+    }
 
 }

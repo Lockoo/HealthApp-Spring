@@ -48,4 +48,10 @@ public class DoctorController
         Doctor doctor = docService.changeFirstName(doc.getDoc(), doc.getFirstName());
         return doctor;
     }
+    
+    @PostMapping(value = "/delete", produces = "application/json")
+    public void deleteDoctor(@RequestBody Doctor doctor)
+    {
+       docService.deleteDoctor(doctor);
+    }
 }

@@ -15,4 +15,6 @@ public interface DoctorService
     public Doctor saveDoctor(Doctor doc);
     
     public Doctor changeFirstName(Doctor doc, String firstName);
+    
+    public void deleteDoctor(Doctor doctor);
 }
