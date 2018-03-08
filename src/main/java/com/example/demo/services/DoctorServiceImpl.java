@@ -1,13 +1,8 @@
 package com.example.demo.services;
 
-import static org.mockito.Matchers.anyList;
-
-import java.awt.List;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.example.demo.domain.Doctor;
 import com.example.demo.repositories.DoctorDAO;
 

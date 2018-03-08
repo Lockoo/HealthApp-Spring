@@ -3,31 +3,19 @@ package com.example.demo.controllers;
 import java.util.Collections;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -125,6 +113,7 @@ public class UserAccountController
         }
     }
 
+    //TODO doc login
     @PostMapping(value = "/login")
     public ExecutionStatus processLogin(ModelMap model, @RequestBody User reqUser)
     {
@@ -142,13 +131,9 @@ public class UserAccountController
             System.out.println("Login fehlgeschlagen. Benutzername oder Passwort inkorrekt");
             return new ExecutionStatus("FAILURE", "Username or password is incorrect. Please try again!");
         }
-        User userDetails = new User();
-        userDetails.setFirstName(user.getFirstName());
-        userDetails.setEmail(user.getEmail());
-        userDetails.setLastName(user.getLastName());
-        System.out.println("Login von: " + user.getFirstName() + " erfolgreich.");
 
-        return new ExecutionStatus("USER_LOGIN_SUCCESSFUL", "Login Successful!", new User_Json(userDetails));
+        System.out.println("Login von: " + user.getFirstName() + " erfolgreich.");
+        return new ExecutionStatus("USER_LOGIN_SUCCESSFUL", "Login Successful!", new User_Json(user));
     }
 
     @PostMapping(value = "/user/update")

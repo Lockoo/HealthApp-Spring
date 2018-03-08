@@ -1,6 +1,5 @@
 package com.example.demo.helpers;
 
-import com.example.demo.domain.User;
 
 public class ExecutionStatus {
 	private String code;

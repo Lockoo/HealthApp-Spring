@@ -1,0 +1,36 @@
+version: '3'
+
+services: 
+  healthapp-mysql: 
+    environment: 
+      - MYSQL_DATABASE=healthapp
+      - MYSQL_ROOT_PASSWORD=a
+    ports: 
+      - "3306:3306"
+    expose:
+      - "3306"
+     
+    image: mysql
+    restart: always
+    volumes: 
+      - ./mysql_init:/docker-entrypoint-initdb.d
+     
+
+  healthapp-spring: 
+    depends_on: 
+      - healthapp-mysql
+    image: locko/healthapp-spring
+    ports: 
+      - "8080:8080"
+
+  healthapp-angular:
+    image: locko/healthapp-angular
+    ports:
+      - "4200:4200"
+    depends_on:
+      - healthapp-spring
+
+    
+    
+
+

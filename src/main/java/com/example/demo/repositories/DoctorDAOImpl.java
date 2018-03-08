@@ -31,6 +31,7 @@ public class DoctorDAOImpl implements DoctorDAO
     }
 
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Doctor> findAll()
     {
@@ -40,6 +41,7 @@ public class DoctorDAOImpl implements DoctorDAO
     }
 
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Doctor> findByEmail(String email)
     {

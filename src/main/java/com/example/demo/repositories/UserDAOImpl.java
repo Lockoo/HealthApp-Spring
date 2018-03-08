@@ -1,16 +1,11 @@
 package com.example.demo.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.TypedQuery;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.domain.User;
@@ -35,6 +30,7 @@ public class UserDAOImpl implements UserDAO
     // where u.email = :email").setString("email", email).list();
     // }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<User> findByEmailAndPassword(String email, String password)
     {
@@ -57,6 +53,7 @@ public class UserDAOImpl implements UserDAO
         return count;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<User> findByEmail(String email)
     {

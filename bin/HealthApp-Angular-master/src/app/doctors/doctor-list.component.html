@@ -1,0 +1,38 @@
+<div>
+<div>
+
+</div>
+
+  <h4>Click on a speciality to see registered doctors for this field</h4>
+  <ul class="nav nav-tabs  nav-justified">
+    <li role="presentation" (click)="showAll()"><a style="cursor: pointer;">All</a></li>
+    <li role="presentation" (click)="onSelect('PHYSICIST')"><a style="cursor: pointer;">Physicists</a></li>
+    <li role="presentation" (click)="onSelect('PEDIATRICIAN')"><a style="cursor: pointer;">Pediatricians</a></li>
+    <li role="presentation" (click)="onSelect('CARDIOPHYSICIAN')"><a style="cursor: pointer;">Cardio-Physicians</a></li>
+  </ul>
+  
+<h1 *ngIf="setSpeciality != 'All' ">All {{setSpeciality}} </h1>
+<h1 *ngIf="setSpeciality == 'All'">All</h1>
+
+<hr/>
+<div class="panel panel-info"  *ngFor="let doctor of doctors">
+  <div class="panel-heading"><strong>{{doctor.firstName}} {{doctor.lastName}}</strong></div>
+  <div class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Email</strong>: {{doctor.email}}</li>
+      <li class="list-group-item"><strong>Speciality</strong>: {{doctor.speciality}}</li>
+    </ul>
+    <div>
+      <button type="button" (click)="selectedDoctor = doctor">Change first name
+      </button>
+      <button type="button" (click)="deleteDoctor(doctor)">Delete Doctor
+      </button>
+    </div>
+    <form *ngIf="selectedDoctor == doctor" (ngSubmit) = "onChangeFirstName()">
+    	<input type="text" name="firstName" id="firstName" placeholder="new Firstname" required [(ngModel)]="firstName">
+    	<input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+<p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+</div>
