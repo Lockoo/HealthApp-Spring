@@ -4,6 +4,7 @@ package com.example.demo.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.domain.Doctor;
+import com.example.demo.exceptions.UnmatchingUserCredentialsException;
 import com.example.demo.repositories.DoctorDAO;
 
 @Service
@@ -74,5 +75,11 @@ public class DoctorServiceImpl implements DoctorService
     public void deleteDoctor(Doctor doctor)
     {
         this.docDAO.deleteDoctor(doctor);
+    }
+    
+    @Override
+    public Doctor isValidDoctor(String email, String password) throws UnmatchingUserCredentialsException
+    {
+        return this.docDAO.isValidDoctor(email, password);
     }
 }

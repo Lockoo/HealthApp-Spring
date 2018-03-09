@@ -1,14 +1,16 @@
 package com.example.demo.exceptions;
 
-public class UserNotFoundException extends Exception {
+public class UserNotFoundException extends Exception
+{
+    private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;
+    public UserNotFoundException(String message)
+    {
+        super(message);
+    }
 
-	public UserNotFoundException(String message) {
-		super(message);
-	}
+    public UserNotFoundException()
+    {
 
-	public UserNotFoundException() {
-		// TODO Auto-generated constructor stub
-	}
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.domain.Doctor;
+import com.example.demo.exceptions.UnmatchingUserCredentialsException;
 
 @Repository
 @Transactional()
@@ -83,6 +85,25 @@ public class DoctorDAOImpl implements DoctorDAO
         Query query = session.getNamedQuery("deleteDoctor");
         query.setParameter("email", doctor.getEmail());
         query.executeUpdate();
+    }
+    
+    @SuppressWarnings("unchecked")
+    public Doctor isValidDoctor(String email, String password) throws UnmatchingUserCredentialsException
+    {
+        Session session = this.sessionFactory.openSession();
+        Query query = session.getNamedQuery("findDocByEmailAndPassword");
+        query.setParameter("email", email);
+        query.setParameter("password", password);
+        ArrayList<Object> queryList = new ArrayList<Object>(query.list());
+        if(queryList.isEmpty())
+        {
+            throw new UnmatchingUserCredentialsException("No Doctor Account found for this combination");
+        }
+        else
+        {
+            return (Doctor) queryList.get(0);
+        }
+        
     }
 
 }

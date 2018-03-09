@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.domain.Doctor;
+import com.example.demo.exceptions.UnmatchingUserCredentialsException;
 
 public interface DoctorService
 {
@@ -17,4 +18,6 @@ public interface DoctorService
     public Doctor changeFirstName(Doctor doc, String firstName);
     
     public void deleteDoctor(Doctor doctor);
+    
+    public Doctor isValidDoctor(String email, String password) throws UnmatchingUserCredentialsException;
 }

@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 import java.util.Collections;
 import java.util.Map;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -35,11 +34,8 @@ import com.example.demo.services.UserService;
 @RequestMapping("/account/*")
 public class UserAccountController
 {
-
     final static Logger logger = LoggerFactory.getLogger(UserAccountController.class);
 
-    // Delegate Service for serving User Login Functionality (check wether user
-    // with the given login credentials, exists in the system -> userDAO)
     private UserService userService;
 
     private DoctorService doctorService;
@@ -57,13 +53,11 @@ public class UserAccountController
         return Collections.singletonMap("token", session.getId());
     }
 
-    // TODO rite now (lastName missing on signup)
     @PostMapping(value = "/signup")
     public ExecutionStatus processSignup(ModelMap model, @RequestBody User_Json reqUser)
     {
         if (reqUser.getRole() == 0)
         {
-            System.out.println("role 0");
             User user = null;
             try
             {
@@ -92,7 +86,6 @@ public class UserAccountController
 
         else
         {
-            System.out.println("role 1");
             if (doctorService.doesDoctorExist(reqUser.getEmail()))
             {
                 return new ExecutionStatus("DOCTOR_ACCOUNT_EXISTS", "Doctor Account with this email exists, please try again.");
@@ -105,15 +98,15 @@ public class UserAccountController
                 doc.setEmail(reqUser.getEmail());
                 doc.setPassword(reqUser.getPassword());
                 doc.setSpeciality(reqUser.getSpeciality());
-                
+
                 doctorService.saveDoctor(doc);
-                
+
                 return new ExecutionStatus("DOCTOR_ACCOUNT_CREATED", "Doctor account successfully created", new User_Json(doc));
             }
         }
     }
 
-    //TODO doc login
+    // TODO doc login vorlage
     @PostMapping(value = "/login")
     public ExecutionStatus processLogin(ModelMap model, @RequestBody User reqUser)
     {
@@ -182,7 +175,6 @@ public class UserAccountController
         UsersInfo data = new UsersInfo();
         data.setCount(count);
         data.setMessage("findAllCount");
-        // TODO get all users and set them here -> mirror datatypes in angular
         return data;
     }
 

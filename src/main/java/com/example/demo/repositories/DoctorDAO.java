@@ -3,6 +3,7 @@ package com.example.demo.repositories;
 import java.util.List;
 
 import com.example.demo.domain.Doctor;
+import com.example.demo.exceptions.UnmatchingUserCredentialsException;
 
 public interface DoctorDAO
 {
@@ -17,4 +18,6 @@ public interface DoctorDAO
     public Doctor changeFirstName(Doctor doc, String firstName);
     
     public void deleteDoctor(Doctor doc);
+    
+    public Doctor isValidDoctor(String email, String password) throws UnmatchingUserCredentialsException;
 }

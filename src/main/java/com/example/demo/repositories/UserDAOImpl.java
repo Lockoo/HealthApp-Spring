@@ -17,29 +17,14 @@ public class UserDAOImpl implements UserDAO
     @Autowired
     private SessionFactory sessionFactory;
 
-//    @Autowired
-//    public UserDAOImpl(SessionFactory sessionFactory)
-//    {
-//        this.sessionFactory = sessionFactory;
-//    }
-
-    // @Override
-    // public List<User> findByEmail(String email)
-    // {
-    // return this.sessionFactory.getCurrentSession().createQuery("from User u
-    // where u.email = :email").setString("email", email).list();
-    // }
-
     @SuppressWarnings("unchecked")
     @Override
     public List<User> findByEmailAndPassword(String email, String password)
     {
         Session session = this.sessionFactory.getCurrentSession();
-        //TODO throws exception?
         Query query = session.getNamedQuery("findByEmailAndPassword");
         query.setParameter("email", email);
         query.setParameter("password", password);
-        //TODO role has to be searched for user logging in
         return query.list();
     }
 
@@ -48,7 +33,7 @@ public class UserDAOImpl implements UserDAO
     {
         Session session = this.sessionFactory.getCurrentSession();
         Query query = session.getNamedQuery("findAllCount");
-        long count = (long)query.list().get(0);
+        long count = (long) query.list().get(0);
         System.out.println(count);
         return count;
     }
