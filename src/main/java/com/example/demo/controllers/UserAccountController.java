@@ -105,6 +105,12 @@ public class UserAccountController
             }
         }
     }
+    
+    @GetMapping(value = "test")
+    public String test()
+    {
+        return "test";
+    }
 
     // TODO doc login vorlage
     @PostMapping(value = "/login")
