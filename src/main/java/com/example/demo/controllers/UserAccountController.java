@@ -46,6 +46,7 @@ public class UserAccountController
         this.userService = userService;
         this.doctorService = doctorService;
     }
+    
 
     @GetMapping(value = "/token")
     public Map<String, String> getToken(HttpSession session)
@@ -127,11 +128,9 @@ public class UserAccountController
         }
         if (user == null)
         {
-            System.out.println("Login fehlgeschlagen. Benutzername oder Passwort inkorrekt");
             return new ExecutionStatus("FAILURE", "Username or password is incorrect. Please try again!");
         }
 
-        System.out.println("Login von: " + user.getFirstName() + " erfolgreich.");
         return new ExecutionStatus("USER_LOGIN_SUCCESSFUL", "Login Successful!", new User_Json(user));
     }
 

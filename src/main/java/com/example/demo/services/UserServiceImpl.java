@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService
     {
         if(userDAO.findByEmail(email).isEmpty())
         {
-            throw new UserNotFoundException("User with Email: " + email + " not found.");
+            throw new UserNotFoundException("User does not exist in the database.");
         }
         else
         {

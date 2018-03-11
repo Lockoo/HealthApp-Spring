@@ -7,9 +7,10 @@
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
+	<name>HealthApp</name>
+	<description>A Platform for Doctors and Patients</description>
 
-	<name>HelloWorld</name>
-	<description>Demo project for Spring Boot</description>
+
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -17,7 +18,10 @@
 		<version>2.0.0.RELEASE</version>
 	</parent>
 
+
+
 	<repositories>
+
 		<repository>
 			<id>spring-snapshots</id>
 			<name>Spring Snapshots</name>
@@ -26,22 +30,31 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+
 		<repository>
 			<id>spring-milestones</id>
 			<url>http://repo.spring.io/milestone</url>
 		</repository>
+
 	</repositories>
 
+
+
 	<pluginRepositories>
+
 		<pluginRepository>
 			<id>spring-snapshots</id>
 			<url>http://repo.spring.io/snapshot</url>
 		</pluginRepository>
+
 		<pluginRepository>
 			<id>spring-milestones</id>
 			<url>http://repo.spring.io/milestone</url>
 		</pluginRepository>
+
 	</pluginRepositories>
+
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -51,34 +64,41 @@
 		<junit.jupiter.version>5.0.0-M4</junit.jupiter.version>
 		<junit.vintage.version>${junit.version}.0-M4</junit.vintage.version>
 		<junit.platform.version>1.0.0-M4</junit.platform.version>
-		<mockito.version>1.10.19</mockito.version>
 	</properties>
 
-	<dependencies>
 
+
+	<dependencies>
+		<!-- STARTERS -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
+
+
+		<!-- DB -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -97,21 +117,8 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-		</dependency>
-
-
-		<!-- SPRING SECURITY <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-web</artifactId> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-config</artifactId> </dependency> -->
+ 
+		<!-- TESTS -->
 
 
 		<dependency>
@@ -139,14 +146,17 @@
 			<artifactId>junit-jupiter-engine</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 
+		<!-- TOOLS -->
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
 		</dependency>
 
 	</dependencies>
+
+
 
 	<build>
 		<plugins>
@@ -199,6 +209,4 @@
 
 		</plugins>
 	</build>
-
-
 </project>

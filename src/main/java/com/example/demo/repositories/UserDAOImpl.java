@@ -17,7 +17,8 @@ public class UserDAOImpl implements UserDAO
     @Autowired
     private SessionFactory sessionFactory;
 
-    @SuppressWarnings({ "unchecked", "deprecation", "rawtypes" })
+    @SuppressWarnings(
+    { "unchecked", "rawtypes" })
     @Override
     public List<User> findByEmailAndPassword(String email, String password)
     {
@@ -28,7 +29,9 @@ public class UserDAOImpl implements UserDAO
         return query.list();
     }
 
-    @SuppressWarnings({ "rawtypes", "deprecation" })
+    //TODO could throw nullpointer
+    @SuppressWarnings(
+    { "rawtypes" })
     @Override
     public long findAllCount()
     {
@@ -39,7 +42,8 @@ public class UserDAOImpl implements UserDAO
         return count;
     }
 
-    @SuppressWarnings({ "unchecked", "deprecation", "rawtypes" })
+    @SuppressWarnings(
+    { "unchecked", "deprecation", "rawtypes" })
     @Override
     public List<User> findByEmail(String email)
     {
