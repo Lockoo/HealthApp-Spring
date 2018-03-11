@@ -1,7 +1,7 @@
 package com.example.demo.repositories;
 
 import java.util.List;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class UserDAOImpl implements UserDAO
     @Autowired
     private SessionFactory sessionFactory;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "deprecation", "rawtypes" })
     @Override
     public List<User> findByEmailAndPassword(String email, String password)
     {
@@ -28,6 +28,7 @@ public class UserDAOImpl implements UserDAO
         return query.list();
     }
 
+    @SuppressWarnings({ "rawtypes", "deprecation" })
     @Override
     public long findAllCount()
     {
@@ -38,7 +39,7 @@ public class UserDAOImpl implements UserDAO
         return count;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "deprecation", "rawtypes" })
     @Override
     public List<User> findByEmail(String email)
     {

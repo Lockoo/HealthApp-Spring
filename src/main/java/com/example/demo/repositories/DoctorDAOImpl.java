@@ -3,9 +3,10 @@ package com.example.demo.repositories;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,7 @@ public class DoctorDAOImpl implements DoctorDAO
     public List<Doctor> findBySpeciality(String speciality)
     {
         Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.getNamedQuery("findBySpeciality");
+        Query<Doctor> query = session.getNamedQuery("findBySpeciality");
         query.setParameter("speciality", speciality);
         return query.list();
     }
@@ -38,17 +39,17 @@ public class DoctorDAOImpl implements DoctorDAO
     public List<Doctor> findAll()
     {
         Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.getNamedQuery("findAll");
+        Query<Doctor> query = session.getNamedQuery("findAll");
         return query.list();
     }
 
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "deprecation" })
     @Override
     public List<Doctor> findByEmail(String email)
     {
         Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.getNamedQuery("findDocByEmail");
+        Query<Doctor> query = session.getNamedQuery("findDocByEmail");
         query.setString("email", email);
         return query.list();
     }
@@ -64,25 +65,27 @@ public class DoctorDAOImpl implements DoctorDAO
     }
 
 
+    @SuppressWarnings("unchecked")
     @Override
     public Doctor changeFirstName(Doctor doc, String firstName)
     {
         Session session = this.sessionFactory.openSession();
-        Query query = session.getNamedQuery("changeDocFirstName");
+        Query<Doctor> query = session.getNamedQuery("changeDocFirstName");
         query.setParameter("email", doc.getEmail());
         query.setParameter("firstName", firstName);
         query.executeUpdate();
         
-        Query queryReturn = session.getNamedQuery("findDocByEmail");
+        Query<Doctor> queryReturn = session.getNamedQuery("findDocByEmail");
         queryReturn.setParameter("email", doc.getEmail());
         return (Doctor) queryReturn.list().get(0);
     }
     
+    @SuppressWarnings("unchecked")
     @Override
     public void deleteDoctor(Doctor doctor)
     {
         Session session = this.sessionFactory.openSession();
-        Query query = session.getNamedQuery("deleteDoctor");
+        Query<Doctor> query = session.getNamedQuery("deleteDoctor");
         query.setParameter("email", doctor.getEmail());
         query.executeUpdate();
     }
@@ -91,7 +94,7 @@ public class DoctorDAOImpl implements DoctorDAO
     public Doctor isValidDoctor(String email, String password) throws UnmatchingUserCredentialsException
     {
         Session session = this.sessionFactory.openSession();
-        Query query = session.getNamedQuery("findDocByEmailAndPassword");
+        Query<Doctor> query = session.getNamedQuery("findDocByEmailAndPassword");
         query.setParameter("email", email);
         query.setParameter("password", password);
         ArrayList<Object> queryList = new ArrayList<Object>(query.list());
