@@ -48,7 +48,6 @@ public class DoctorController
         return docs;
     }
     
-    //TODO doc login impl
     @PostMapping(value = "/login", produces = "application/json")
     public ExecutionStatus processDoctorLogin(@RequestBody User reqUser)
     {

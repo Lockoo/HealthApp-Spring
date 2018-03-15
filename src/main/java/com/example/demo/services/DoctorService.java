@@ -2,14 +2,13 @@ package com.example.demo.services;
 
 import com.example.demo.domain.Doctor;
 import com.example.demo.exceptions.UnmatchingUserCredentialsException;
+import com.example.demo.exceptions.UserNotFoundException;
 
 public interface DoctorService
-{
-    public boolean doesDoctorExist(String email);
-    
+{    
     public Doctor[] getBySpeciality(String speciality);
     
-    public Doctor getByEmail(String email);
+    public Doctor getByEmail(String email) throws UserNotFoundException;
     
     public Doctor[] findAll();
     

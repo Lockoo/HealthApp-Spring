@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import java.util.Collections;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.domain.Doctor;
-//import com.example.demo.configuration.CustomAuthenticationProvider;
 import com.example.demo.domain.User;
 import com.example.demo.exceptions.UnmatchingUserCredentialsException;
 import com.example.demo.exceptions.UserNotFoundException;
@@ -46,7 +46,6 @@ public class UserAccountController
         this.userService = userService;
         this.doctorService = doctorService;
     }
-    
 
     @GetMapping(value = "/token")
     public Map<String, String> getToken(HttpSession session)
@@ -87,13 +86,22 @@ public class UserAccountController
 
         else
         {
-            if (doctorService.doesDoctorExist(reqUser.getEmail()))
+            Doctor doc = null;
+            try
+            {
+                doc = doctorService.getByEmail(reqUser.getEmail());
+            }
+            catch(UserNotFoundException ex)
+            {
+                
+            }
+            if (doc != null)
             {
                 return new ExecutionStatus("DOCTOR_ACCOUNT_EXISTS", "Doctor Account with this email exists, please try again.");
             }
             else
             {
-                Doctor doc = new Doctor();
+                doc = new Doctor();
                 doc.setFirstName(reqUser.getFirstName());
                 doc.setLastName(reqUser.getLastName());
                 doc.setEmail(reqUser.getEmail());
@@ -106,32 +114,27 @@ public class UserAccountController
             }
         }
     }
-    
+
     @GetMapping(value = "test")
     public String test()
     {
         return "test";
     }
 
-    // TODO doc login vorlage
     @PostMapping(value = "/login")
-    public ExecutionStatus processLogin(ModelMap model, @RequestBody User reqUser)
+    public ExecutionStatus processLogin(ModelMap model, @RequestBody User reqUser, HttpServletRequest request)
     {
         User user = null;
         try
         {
             user = userService.isValidUser(reqUser.getEmail(), reqUser.getPassword());
+            return new ExecutionStatus("USER_LOGIN_SUCCESSFUL", "Login Successful!", new User_Json(user));
         }
         catch (UnmatchingUserCredentialsException ex)
         {
             logger.debug(ex.getMessage(), ex);
-        }
-        if (user == null)
-        {
             return new ExecutionStatus("FAILURE", "Username or password is incorrect. Please try again!");
         }
-
-        return new ExecutionStatus("USER_LOGIN_SUCCESSFUL", "Login Successful!", new User_Json(user));
     }
 
     @PostMapping(value = "/user/update")

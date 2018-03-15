@@ -20,7 +20,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import com.example.demo.controllers.UserAccountController;
 import com.example.demo.domain.User;
 import com.example.demo.helpers.ExecutionStatus;
@@ -41,6 +40,7 @@ public class UserAccountControllerTest
     
     @MockBean
     private DoctorService docService;
+    
 
     @BeforeEach
     public void setUp() throws Exception
@@ -66,7 +66,7 @@ public class UserAccountControllerTest
         String jsonUser = gson.toJson(user);
         
         // Pre-program the behavior of Mock; When isValidUser method is invoked, return null object
-        //Mockito.when(this.userService.isValidUser("foo@bar.com", "foobar")).thenReturn(null);
+//        Mockito.when(this.userService.isValidUser("foo@bar.com", "foobar")).thenReturn(null);
         
         // Invoke the controller method
         MvcResult result = this.mockMvc.perform(post("/account/login").contentType(MediaType.APPLICATION_JSON).content(jsonUser)).andExpect(status().isOk()).andReturn();

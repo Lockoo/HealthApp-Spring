@@ -11,9 +11,7 @@ public interface UserService
     void update(User user);
     
     User doesUserExist(String email) throws UserNotFoundException;
-    
-    User getByEmail(String email) throws UserNotFoundException;
-    
+        
     User isValidUser(String email, String password) throws UnmatchingUserCredentialsException;
     
     long findCount();

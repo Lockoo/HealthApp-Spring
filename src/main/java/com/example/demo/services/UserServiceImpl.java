@@ -54,11 +54,6 @@ public class UserServiceImpl implements UserService
         }
     }
 
-    @Override
-    public User getByEmail(String email) throws UserNotFoundException
-    {
-        return null;
-    }
 
     @Override
     public User isValidUser(String email, String password) throws UnmatchingUserCredentialsException

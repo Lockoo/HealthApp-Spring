@@ -3,6 +3,7 @@ package com.example.demo.repositories;
 import java.util.List;
 
 import com.example.demo.domain.User;
+import com.example.demo.exceptions.UserNotFoundException;
 
 public interface UserDAO
 {
@@ -13,4 +14,5 @@ public interface UserDAO
     long findAllCount();
     
     public List<User> findByEmailAndPassword(String email, String password);
+    
 }

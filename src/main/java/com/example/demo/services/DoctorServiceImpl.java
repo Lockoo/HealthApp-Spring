@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.domain.Doctor;
 import com.example.demo.exceptions.UnmatchingUserCredentialsException;
+import com.example.demo.exceptions.UserNotFoundException;
 import com.example.demo.repositories.DoctorDAO;
 
 @Service
@@ -41,28 +42,22 @@ public class DoctorServiceImpl implements DoctorService
     }
 
     @Override
-    public boolean doesDoctorExist(String email)
-    {       
-        if(this.docDAO.findByEmail(email).isEmpty())
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    @Override
     public Doctor saveDoctor(Doctor doc)
     {
         return this.docDAO.saveDoctor(doc);
     }
 
     @Override
-    public Doctor getByEmail(String email)
+    public Doctor getByEmail(String email) throws UserNotFoundException
     {
-        return this.docDAO.findByEmail(email).get(0);
+        if(this.docDAO.findByEmail(email).isEmpty())
+        {
+            throw new UserNotFoundException("Doctor with email: " + email + " does not exist in Database.");
+        }
+        else
+        {
+            return this.docDAO.findByEmail(email).get(0);
+        }
     }
 
     @Override

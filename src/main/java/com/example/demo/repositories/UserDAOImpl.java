@@ -1,5 +1,7 @@
 package com.example.demo.repositories;
 
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.queryParam;
+
 import java.util.List;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
@@ -9,13 +11,21 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.domain.User;
+import com.example.demo.exceptions.UserNotFoundException;
 
 @Repository
 @Transactional()
 public class UserDAOImpl implements UserDAO
 {
+    //TODO double @autowired
     @Autowired
     private SessionFactory sessionFactory;
+    
+    @Autowired
+    public UserDAOImpl(SessionFactory sessionFactory)
+    {
+        this.sessionFactory = sessionFactory;
+    }
 
     @SuppressWarnings(
     { "unchecked", "rawtypes" })
@@ -61,6 +71,7 @@ public class UserDAOImpl implements UserDAO
         session.close();
         return user;
     }
+
 
     // For dynamic creation of queries at runtime use Criteria API
 
