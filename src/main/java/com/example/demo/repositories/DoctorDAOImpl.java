@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -70,10 +71,12 @@ public class DoctorDAOImpl implements DoctorDAO
     public Doctor changeFirstName(Doctor doc, String firstName)
     {
         Session session = this.sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
         Query<Doctor> query = session.getNamedQuery("changeDocFirstName");
         query.setParameter("email", doc.getEmail());
         query.setParameter("firstName", firstName);
         query.executeUpdate();
+        tx.commit();
         
         Query<Doctor> queryReturn = session.getNamedQuery("findDocByEmail");
         queryReturn.setParameter("email", doc.getEmail());
@@ -85,9 +88,11 @@ public class DoctorDAOImpl implements DoctorDAO
     public void deleteDoctor(Doctor doctor)
     {
         Session session = this.sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
         Query<Doctor> query = session.getNamedQuery("deleteDoctor");
         query.setParameter("email", doctor.getEmail());
         query.executeUpdate();
+        tx.commit();
     }
     
     @SuppressWarnings("unchecked")
