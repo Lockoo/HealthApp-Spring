@@ -25,8 +25,8 @@ import com.example.demo.domain.User;
 import com.example.demo.helpers.ExecutionStatus;
 import com.example.demo.services.DoctorService;
 import com.example.demo.services.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(SpringExtension.class)
 @Tag("Controller")
@@ -66,7 +66,7 @@ public class UserAccountControllerTest
         String jsonUser = gson.toJson(user);
         
         // Pre-program the behavior of Mock; When isValidUser method is invoked, return null object
-//        Mockito.when(this.userService.isValidUser("foo@bar.com", "foobar")).thenReturn(null);
+        Mockito.when(this.userService.isValidUser("foo@bar.com", "foobar")).thenReturn(null);
         
         // Invoke the controller method
         MvcResult result = this.mockMvc.perform(post("/account/login").contentType(MediaType.APPLICATION_JSON).content(jsonUser)).andExpect(status().isOk()).andReturn();
